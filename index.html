@@ -106,8 +106,8 @@
     let sessionBirthdayShown = false;
 
       function updateSpeed(){
-      if(score > 0 && score % 5 === 0){   // كل 5 نقاط
-        pipeSpeed += 0.3;                 // زوّد السرعة
+      if(score > 0 && score % 3 === 0){   // كل 5 نقاط
+        pipeSpeed += 0.4;                 // زوّد السرعة
         // عشان مايزودش اكتر من مرة عند نفس النقطة
         score += 1;  // نزود نقطة واحدة زيادة مؤقتًا لتفادي التكرار
       }
@@ -261,7 +261,7 @@
             // ✅ استدعاء دالة زيادة السرعة
             updateSpeed();
 
-            if(score>=4 && !sessionBirthdayShown){
+            if(score>=8 && !sessionBirthdayShown){
               sessionBirthdayShown=true;
               running=false; 
               bdaySound.currentTime=0;
