@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>لعبة الطيران - نقاط (بدون عياط)</title>
+  <title>لعبة الطيران - نقاط</title>
   <style>
     :root {
       --bg1: #b3ecff;
@@ -94,17 +94,24 @@
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
 
-    let gravity = 0.45, flapStrength = -8.6;
-    let pipeSpeed = 2.6, pipeGap = 180, pipeWidth = 72;
+     let gravity = 0.45, flapStrength = -8.6;
+    let pipeSpeed = 3, pipeGap = 180, pipeWidth = 72;
     let spawnInterval = 110, frame = 0;
 
-    const player = { x:100, y:H/2, w:52, h:52, vy:0 };
+     const player = { x:100, y:H/2, w:52, h:52, vy:0 };
     let pipes = []; let running=false, isGameOver=false;
     let score=0, best=Number(localStorage.getItem('flappy_best_v2')||0);
     bestDisplay.textContent='أفضل: '+best;
 
     let sessionBirthdayShown = false;
 
+      function updateSpeed(){
+      if(score > 0 && score % 5 === 0){   // كل 5 نقاط
+        pipeSpeed += 0.3;                 // زوّد السرعة
+        // عشان مايزودش اكتر من مرة عند نفس النقطة
+        score += 1;  // نزود نقطة واحدة زيادة مؤقتًا لتفادي التكرار
+      }
+    }
     // ===== fireworks system =====
     let fireworksActive = false;
     const rockets = [];    
@@ -250,6 +257,10 @@
           const p=pipes[i]; p.x-=pipeSpeed;
           if(!p.passed && (p.x+pipeWidth)<player.x-6){
             p.passed=true; score++;
+
+            // ✅ استدعاء دالة زيادة السرعة
+            updateSpeed();
+
             if(score>=4 && !sessionBirthdayShown){
               sessionBirthdayShown=true;
               running=false; 
@@ -281,7 +292,6 @@
         }
       }
     }
-
     function endGame(){ isGameOver = true;
     running = false;
 
