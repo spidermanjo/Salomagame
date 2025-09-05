@@ -94,8 +94,9 @@
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
 
-     let gravity = 0.45, flapStrength = -8.6;
-    let pipeSpeed = 3, pipeGap = 180, pipeWidth = 72;
+     let gravity = 0.35, flapStrength = -8.6;
+let pipeSpeed = 2, pipeGap = 250, pipeWidth = 72;
+
     let spawnInterval = 110, frame = 0;
 
      const player = { x:100, y:H/2, w:52, h:52, vy:0 };
@@ -261,16 +262,16 @@
             // ✅ استدعاء دالة زيادة السرعة
             updateSpeed();
 
-            if(score>=8 && !sessionBirthdayShown){
+            if(score>=3 && !sessionBirthdayShown){
               sessionBirthdayShown=true;
               running=false; 
               bdaySound.currentTime=0;
               bdaySound.play().catch(()=>{});
               fireworksActive = true;
               showModal(`<div class="heart">❤️</div>
-                <h3>كل سنة و إنتِ طيبة يا اجمل و اطيب سلومههه! 🎉</h3>
+                <h3>كل سنة و إنتِ طيبة يا اجمل و اطيب سلومتيييي! 🎉</h3>
                 <p>يا رب دايمًا تكوني بخير وسعيدة وتحققي كل اللي في بالك ❤️❤️❤️🥰</p>
-                <p>happy birthday from JoX to SaL Ma 🥰</p>
+                <p>happy birthday from joo to Salomaaa 🥰</p>
                 <p><button class='btn' onclick="continueGame();">استمرار اللعب</button></p>`);
             }
             if(score>best){ best=score; localStorage.setItem('flappy_best_v2',best); }
@@ -373,3 +374,4 @@
   </script>
 </body>
 </html>
+
